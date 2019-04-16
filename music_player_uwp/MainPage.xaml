@@ -6,18 +6,43 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Height="720" Width="1280">
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="0*"/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <Button x:Name="playButton" Content="play" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="122,1037,0,0" Grid.Row="1"/>
-        <Button x:Name="preButton" Content="pre" HorizontalAlignment="Left" Margin="10,1037,0,0" Width="50" VerticalAlignment="Top" Grid.Row="1"/>
-        <Button x:Name="nextButton" Content="next" HorizontalAlignment="Left" Margin="66,1037,0,0" Width="50" VerticalAlignment="Top" Grid.Row="1"/>
-        <ListView x:Name="listView" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="264" Grid.Row="1" Height="1021"/>
-        <Button x:Name="openButton" Content="Open folder" HorizontalAlignment="Left" Margin="174,1037,0,0" VerticalAlignment="Top" Grid.RowSpan="2"/>
-        <NavigationView Content="NavigationView" Margin="279,10,10,10" VerticalAlignment="Stretch" Grid.Row="1" HorizontalAlignment="Stretch"/>
+    <Grid x:Name="MainLayout" Height="720" HorizontalAlignment="Stretch">
+        <NavigationView x:Name="navi" Margin="10,10,790,0" VerticalAlignment="Top" PaneDisplayMode="Top" IsBackButtonVisible="Collapsed" HorizontalAlignment="Stretch" >
+            <NavigationView.MenuItems>
+                <NavigationViewItem Content="歌曲列表" Tag="SongList" Icon="MusicInfo"></NavigationViewItem>
+                <NavigationViewItem Content="云歌单" Tag="CloudList" >
+                    <NavigationViewItem.Icon>
+                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE753;"></FontIcon>
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+                <NavigationViewItem Content="本地文件" Tag="LocationList" Icon="Download"></NavigationViewItem>
+            </NavigationView.MenuItems>
+            <NavigationView.PaneFooter>
+                <NavigationViewItem Tag="User" Icon="Contact"/>
+            </NavigationView.PaneFooter>
+        </NavigationView>
+        <Frame x:Name="frame" Margin="11,55,790,51" HorizontalAlignment="Stretch" Padding="0,0,0,0" VerticalAlignment="Stretch"/>
+        <Frame x:Name="frame1" HorizontalAlignment="Left" Margin="11,674,0,0" Padding="0,0,0,0" VerticalAlignment="Stretch" Width="479"/>
+        <Frame x:Name="ExpandeFrame" HorizontalAlignment="Stretch" Margin="495,10,10,10">
+            <NavigationView HorizontalAlignment="Stretch"
+                            VerticalAlignment="Top"
+                            Height="40" 
+                            PaneDisplayMode="Top"
+                            IsBackButtonVisible="Collapsed"
+                            IsSettingsVisible="False" Margin="10,0,10.2,0">
+                <NavigationView.MenuItems>
+                    <NavigationViewItem Tag="SearchSong" Icon="Find" Content="音乐搜索"></NavigationViewItem>
+                    <NavigationViewItem Tag="SongLib" Content="乐库">
+                        <NavigationViewItem.Icon>
+                            <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xEC4F;" />
+                        </NavigationViewItem.Icon>
+                    </NavigationViewItem>
+                    <NavigationViewItem Tag="MvPage" Icon="Video" Content="MV" />
+                    <NavigationViewItem Tag="LyricPage" Icon="Font" Content="歌词" />
+                </NavigationView.MenuItems>
+            </NavigationView>
+        </Frame>
     </Grid>
 </Page>

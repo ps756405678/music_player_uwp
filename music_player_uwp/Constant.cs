@@ -9,6 +9,6 @@ namespace music_player_uwp
     class Constant
     {
         public const int URL_TYPE = 1;
-        public const int FILE_TYPE = 1;
+        public const int FILE_TYPE = 2;
     }
 }
