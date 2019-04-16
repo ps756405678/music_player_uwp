@@ -2,14 +2,14 @@
     x:Class="music_player_uwp.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:music_player_uwp"
+    xmlns:local="using:music_player_uwp.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Height="720" Width="1280">
 
     <Grid x:Name="MainLayout" Height="720" HorizontalAlignment="Stretch">
-        <NavigationView x:Name="navi" Margin="10,10,790,0" VerticalAlignment="Top" PaneDisplayMode="Top" IsBackButtonVisible="Collapsed" HorizontalAlignment="Stretch" >
+        <NavigationView x:Name="navi" Margin="10,10,790,0" VerticalAlignment="Top" PaneDisplayMode="Top" IsBackButtonVisible="Collapsed" HorizontalAlignment="Stretch" Height="40" >
             <NavigationView.MenuItems>
                 <NavigationViewItem Content="歌曲列表" Tag="SongList" Icon="MusicInfo"></NavigationViewItem>
                 <NavigationViewItem Content="云歌单" Tag="CloudList" >
@@ -23,15 +23,14 @@
                 <NavigationViewItem Tag="User" Icon="Contact"/>
             </NavigationView.PaneFooter>
         </NavigationView>
-        <Frame x:Name="frame" Margin="11,55,790,51" HorizontalAlignment="Stretch" Padding="0,0,0,0" VerticalAlignment="Stretch"/>
-        <Frame x:Name="frame1" HorizontalAlignment="Left" Margin="11,674,0,0" Padding="0,0,0,0" VerticalAlignment="Stretch" Width="479"/>
-        <Frame x:Name="ExpandeFrame" HorizontalAlignment="Stretch" Margin="495,10,10,10">
-            <NavigationView HorizontalAlignment="Stretch"
-                            VerticalAlignment="Top"
-                            Height="40" 
+        <Frame x:Name="frame" Margin="10,55,790,120" Padding="0,0,0,0"/>
+        <Frame x:Name="PlayFrame" Margin="10,600,790,0" Padding="0,0,0,0" VerticalAlignment="Stretch"/>
+        <Frame x:Name="frame2" Margin="500,10,10,0" VerticalAlignment="Top" Height="40">
+            <NavigationView
+                            VerticalAlignment="Stretch" 
                             PaneDisplayMode="Top"
                             IsBackButtonVisible="Collapsed"
-                            IsSettingsVisible="False" Margin="10,0,10.2,0">
+                            IsSettingsVisible="False" Margin="10,0,10,0" HorizontalAlignment="Stretch">
                 <NavigationView.MenuItems>
                     <NavigationViewItem Tag="SearchSong" Icon="Find" Content="音乐搜索"></NavigationViewItem>
                     <NavigationViewItem Tag="SongLib" Content="乐库">
@@ -43,6 +42,8 @@
                     <NavigationViewItem Tag="LyricPage" Icon="Font" Content="歌词" />
                 </NavigationView.MenuItems>
             </NavigationView>
+        </Frame>
+        <Frame x:Name="ExpandeFrame" Margin="500,55,10,0" VerticalAlignment="Stretch">
         </Frame>
     </Grid>
 </Page>

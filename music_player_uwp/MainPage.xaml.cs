@@ -39,8 +39,32 @@ namespace music_player_uwp
             EventListenerRegister();
         }
 
+        private void Init()
+        {
+
+        }
+
         private void EventListenerRegister()
         {
+            // The main navigator onloaded event handler.
+            this.navi.Loaded += (object sender, RoutedEventArgs e) =>
+            {
+                this.frame.Navigate(typeof(SongList));
+            };
+
+            // The function view navigator onloaded event handler.
+            this.ExpandeFrame.Loaded += (object sender, RoutedEventArgs e) =>
+            {
+                this.ExpandeFrame.Navigate(typeof(Pages.Search));
+            };
+
+            // The player control frame onloaded event.
+            this.PlayFrame.Loaded += (object sender, RoutedEventArgs e) =>
+            {
+                this.PlayFrame.Navigate(typeof(Pages.PlayerControlPage));
+            };
+
+            // The main navigator onselectionchanger event handler.
             this.navi.SelectionChanged += (NavigationView sender, NavigationViewSelectionChangedEventArgs e) =>
             {
                 var itemTag = e.SelectedItemContainer.Tag.ToString();
