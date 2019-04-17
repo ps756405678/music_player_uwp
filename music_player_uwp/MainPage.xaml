@@ -43,7 +43,6 @@
                 </NavigationView.MenuItems>
             </NavigationView>
         </Frame>
-        <Frame x:Name="ExpandeFrame" Margin="500,55,10,0" VerticalAlignment="Stretch">
-        </Frame>
+        <Frame x:Name="ExpandeFrame" Margin="500,55,10,0" VerticalAlignment="Stretch"/>
     </Grid>
 </Page>

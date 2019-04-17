@@ -32,4 +32,19 @@
         <Setter Property="Foreground" Value="White"/>
         <Setter Property="Background" Value="LightPink"/>
     </Style>
+    <Style x:Name="PlayerProgressBar" TargetType="ProgressBar">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ProgressBar">
+                    <Grid x:Name="RootGrid" Background="Transparent">
+                        <Rectangle Width="{TemplateBinding Width}"
+                                   Height="{TemplateBinding Height}"
+                                   Fill="{TemplateBinding Background}"
+                                   ></Rectangle>
+                        
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>
