@@ -32,6 +32,7 @@ namespace music_player_uwp
         };
 
         public bool IsExpande = true;
+        private Pages.PlayerControlPage playerControlPage;
 
         public MainPage()
         {
@@ -61,19 +62,34 @@ namespace music_player_uwp
             // The player control frame onloaded event.
             this.PlayFrame.Loaded += (object sender, RoutedEventArgs e) =>
             {
-                this.PlayFrame.Navigate(typeof(Pages.PlayerControlPage));
+                this.PlayFrame.Navigate(typeof(Pages.PlayerControlPage), MockSongList());
+                playerControlPage = (Pages.PlayerControlPage)PlayFrame.Content;
             };
 
             // The main navigator onselectionchanger event handler.
-            this.navi.SelectionChanged += (NavigationView sender, NavigationViewSelectionChangedEventArgs e) =>
+            this.navi.ItemInvoked += (NavigationView sender, NavigationViewItemInvokedEventArgs e) =>
             {
-                var itemTag = e.SelectedItemContainer.Tag.ToString();
+                var itemTag = e.InvokedItemContainer.Tag.ToString();
                 Type page = _pages.Find((tuple) =>
                 {
                     return tuple.tag == itemTag;
                 }).page;
                 this.frame.Navigate(page);
             };
+        }
+
+        private IList<PlayItemModel> MockSongList()
+        {
+            IList<PlayItemModel> re = new List<PlayItemModel>();
+
+            PlayItemModel model = new PlayItemModel()
+            {
+                TotalTime = TimeSpan.FromMinutes(4),
+            };
+
+            re.Add(model);
+
+            return re;
         }
     }
 }

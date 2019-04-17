@@ -10,5 +10,9 @@ namespace music_player_uwp
     {
         public const int URL_TYPE = 1;
         public const int FILE_TYPE = 2;
+
+        public const string PAUSE_ICON = "\uE768";
+        public const string PLAY_ICON = "\uE769";
+        public const string TIME_FORMMAT = @"mm\:ss";
     }
 }

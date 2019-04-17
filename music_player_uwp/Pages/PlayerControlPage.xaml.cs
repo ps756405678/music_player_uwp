@@ -26,7 +26,10 @@ namespace music_player_uwp.Pages
         public TimeSpan CurrentTime { set; get; }
         public int CurrentSongIndex { set; get; }
 
+        private bool Running = false;
+
         private DispatcherTimer timer;
+        private IList<PlayItemModel> SongList;
 
         public event TimeChangeHandler TimeChange;
         public delegate void TimeChangeHandler(object sender, TimeChangeEventArgs e);
@@ -47,6 +50,9 @@ namespace music_player_uwp.Pages
 
         public void Start()
         {
+            this.PlayButton.FontFamily = new FontFamily("Segoe MDL2 Assets"); ;
+            this.PlayButton.Content = Constant.PAUSE_ICON;
+            this.TimeText.Text = "00:00/" + this.TotalTime.ToString(Constant.TIME_FORMMAT);
             this.timer.Start();
         }
 
@@ -57,13 +63,13 @@ namespace music_player_uwp.Pages
 
         public void Pause()
         {
+            this.PlayButton.FontFamily = new FontFamily("Segoe MDL2 Assets");
+            this.PlayButton.Content = Constant.PLAY_ICON;
             this.timer.Stop();
         }
 
         private void Init()
         {
-            this.TotalTime = TimeSpan.FromSeconds(0);
-            this.CurrentTime = TimeSpan.FromSeconds(0);
             this.CurrentSongIndex = 0;
 
             timer = new DispatcherTimer();
@@ -89,9 +95,9 @@ namespace music_player_uwp.Pages
             // Timer update
             this.timer.Tick += (object sender, object e) =>
             {
-                this.CurrentTime.Add(TimeSpan.FromSeconds(1));
-                this.ProcessBar.Value = (double)this.CurrentTime.TotalMilliseconds / (double)this.TotalTime.TotalMilliseconds;
-                this.TimeText.Text = this.CurrentTime.ToString("MM:ss") + "/" + this.CurrentTime.ToString("MM:ss");
+                this.CurrentTime = this.CurrentTime.Add(TimeSpan.FromSeconds(1));
+                this.ProcessBar.Value = 100 * this.CurrentTime.TotalMilliseconds / this.TotalTime.TotalMilliseconds;
+                this.TimeText.Text = this.CurrentTime.ToString(Constant.TIME_FORMMAT) + "/" + this.TotalTime.ToString(Constant.TIME_FORMMAT);
                 if (CurrentTime == TotalTime)
                 {
                     this.CurrentSongIndex += 1;
@@ -103,6 +109,27 @@ namespace music_player_uwp.Pages
             {
                 this.timer.Stop();
             };
+
+            this.PlayButton.Click += (object sender, RoutedEventArgs e) =>
+            {
+                if (!Running)
+                {
+                    this.Start();
+                    Running = !Running;
+                }
+                else
+                {
+                    this.Pause();
+                    Running = !Running;
+                }
+            };
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            this.SongList = (IList<PlayItemModel>)e.Parameter;
+            this.TotalTime = SongList[0].TotalTime;
+            base.OnNavigatedTo(e);
         }
 
         private void OnTimeChange(double time)
