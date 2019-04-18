@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<AllSongList>
+  <SongList id="Default" name="默认列表">
+    <Item Name="My Dearest"
+          Author="supercell"
+          Ablum=""
+          TotalTime="5:38"
+          ResourceLocation="C:\KuGou\supercell - My Dearest.mp3"
+          ResourceType="2"
+        />
+  </SongList>
+</AllSongList>

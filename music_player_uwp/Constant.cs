@@ -14,5 +14,6 @@ namespace music_player_uwp
         public const string PAUSE_ICON = "\uE768";
         public const string PLAY_ICON = "\uE769";
         public const string TIME_FORMMAT = @"mm\:ss";
+        public const string SONG_LIST_FILE = "SongList.xml";
     }
 }

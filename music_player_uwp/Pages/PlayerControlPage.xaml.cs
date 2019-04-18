@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Media.Playback;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -29,7 +30,9 @@ namespace music_player_uwp.Pages
         private bool Running = false;
 
         private DispatcherTimer timer;
+        private MediaPlayer player;
         private IList<PlayItemModel> SongList;
+        private IList<MediaPlaybackItem> PlayerList;
 
         public event TimeChangeHandler TimeChange;
         public delegate void TimeChangeHandler(object sender, TimeChangeEventArgs e);
@@ -127,8 +130,8 @@ namespace music_player_uwp.Pages
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            this.SongList = (IList<PlayItemModel>)e.Parameter;
-            this.TotalTime = SongList[0].TotalTime;
+            //this.SongList = (IList<PlayItemModel>)e.Parameter;
+            //this.TotalTime = SongList[0].TotalTime;
             base.OnNavigatedTo(e);
         }
 

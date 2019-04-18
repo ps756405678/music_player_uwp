@@ -10,6 +10,7 @@ namespace music_player_uwp
     {
         public string Name { set; get; }
         public string Author { set; get; }
+        public string Ablum { set; get; }
         public TimeSpan TotalTime { set; get; }
         public string ResourceLocation { set; get; }
         public int ResourceType { set; get; }

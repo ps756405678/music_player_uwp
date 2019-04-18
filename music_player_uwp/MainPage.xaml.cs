@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
+using Windows.Data.Xml.Dom;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Media.Core;
 using Windows.Media.Playback;
+using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -26,17 +29,19 @@ namespace music_player_uwp
     {
         private readonly List<(string tag, Type page)> _pages = new List<(string tag, Type page)>
         {
-            ("SongList", typeof(SongList)),
+            ("SongList", typeof(Pages.SongList)),
             ("CloudList", typeof(CloudList)),
             ("LocationList", typeof(LocationList)),
         };
-
-        public bool IsExpande = true;
+        
         private Pages.PlayerControlPage playerControlPage;
+
+        private Dictionary<string, IList<PlayItemModel>> AllSongList;
 
         public MainPage()
         {
             this.InitializeComponent();
+            Init();
             EventListenerRegister();
         }
 
@@ -48,9 +53,10 @@ namespace music_player_uwp
         private void EventListenerRegister()
         {
             // The main navigator onloaded event handler.
-            this.navi.Loaded += (object sender, RoutedEventArgs e) =>
+            this.navi.Loaded += async (object sender, RoutedEventArgs e) =>
             {
-                this.frame.Navigate(typeof(SongList));
+                var songList = await Helper.ReadAllListAsync();
+                this.frame.Navigate(typeof(Pages.SongList), songList);
             };
 
             // The function view navigator onloaded event handler.
@@ -62,7 +68,7 @@ namespace music_player_uwp
             // The player control frame onloaded event.
             this.PlayFrame.Loaded += (object sender, RoutedEventArgs e) =>
             {
-                this.PlayFrame.Navigate(typeof(Pages.PlayerControlPage), MockSongList());
+                this.PlayFrame.Navigate(typeof(Pages.PlayerControlPage));
                 playerControlPage = (Pages.PlayerControlPage)PlayFrame.Content;
             };
 
@@ -76,20 +82,6 @@ namespace music_player_uwp
                 }).page;
                 this.frame.Navigate(page);
             };
-        }
-
-        private IList<PlayItemModel> MockSongList()
-        {
-            IList<PlayItemModel> re = new List<PlayItemModel>();
-
-            PlayItemModel model = new PlayItemModel()
-            {
-                TotalTime = TimeSpan.FromMinutes(4),
-            };
-
-            re.Add(model);
-
-            return re;
         }
     }
 }
